@@ -1927,6 +1927,13 @@ bacon: otapackage
 	@echo -e ${CL_CYN}"size:"${CL_MAG}" `ls -lah $(ZEUS_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CL_RST}
 	@echo -e ${CL_CYN}"========================================"${CL_RST}
 	@echo -e ""
+ 
+ifeq ($(CHANGELOG),true)
+# Generate changelog
+	@echo -e ${CL_GRN}"Generating Changelog"${CL_RST}
+	$(hide) ./vendor/zeus/utils/changelog.sh
+	$(hide) mv $(PRODUCT_OUT)/Changelog.txt $(PRODUCT_OUT)/$(TARGET_PRODUCT)-Changelog.txt
+endif
 
 # -----------------------------------------------------------------
 # The factory package
