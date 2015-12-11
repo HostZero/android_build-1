@@ -145,16 +145,16 @@ def add_to_manifest_dependencies(repositories):
         existing_project = exists_in_tree(lm, repo_target)
         if existing_project != None:
             if existing_project.attrib['name'] != repository['repository']:
-                print 'Updating dependency %s' % (repo_name)
+                print ('Updating dependency %s' % (repo_name))
                 existing_project.set('name', repository['repository'])
             if existing_project.attrib['revision'] == repository['branch']:
-                print 'ZEUS/%s already exists' % (repo_name)
+                print ('ZEUS/%s already exists' % (repo_name))
             else:
-                print 'updating branch for %s to %s' % (repo_name, repository['branch'])
+                print ('updating branch for %s to %s' % (repo_name, repository['branch']))
                 existing_project.set('revision', repository['branch'])
             continue
 
-        print 'Adding dependency: %s -> %s' % (repo_name, repo_target)
+        print ('Adding dependency: %s -> %s' % (repo_name, repo_target))
         project = ElementTree.Element("project", attrib = { "path": repo_target,
             "remote": "zeus", "name": repo_name, "revision": "cm-13.0" })
 
