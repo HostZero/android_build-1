@@ -1914,7 +1914,12 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(ZEUS_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(ZEUS_TARGET_PACKAGE) > $(ZEUS_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_CYN}"Package Complete: $(ZEUS_TARGET_PACKAGE)"${CL_RST}
+	@echo -e ${CL_CYN}"===========-Package complete-==========="${CL_RST}
+	@echo -e ${CL_CYN}"zip: "${CL_MAG} $(ZEUS_TARGET_PACKAGE)${CL_RST}
+	@echo -e ${CL_CYN}"md5: "${CL_MAG}" `cat $(ZEUS_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
+	@echo -e ${CL_CYN}"size:"${CL_MAG}" `ls -lah $(ZEUS_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CL_RST}
+	@echo -e ${CL_CYN}"========================================"${CL_RST}
+	@echo -e ""
 
 # -----------------------------------------------------------------
 # The factory package
