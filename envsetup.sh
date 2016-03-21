@@ -2475,25 +2475,16 @@ function make()
     mk_timer $(get_make_command) "$@"
 }
 
-function __detect_shell() {
+if [ "x$SHELL" != "x/bin/bash" ]; then
     case `ps -o command -p $$` in
         *bash*)
-            echo bash
             ;;
         *zsh*)
-            echo zsh
             ;;
         *)
-            echo unknown
-            return 1
+            echo "WARNING: Only bash and zsh are supported, use of other shell may lead to erroneous results"
             ;;
     esac
-    return
-}
-
-
-if ! __detect_shell > /dev/null; then
-    echo "WARNING: Only bash and zsh are supported, use of other shell may lead to erroneous results"
 fi
 
 # Execute the contents of any vendorsetup.sh files we can find.
